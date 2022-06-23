@@ -1,0 +1,28 @@
+package com.example.wallpaper
+
+import android.app.WallpaperManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.os.Bundle
+import android.os.Handler
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_main.*
+
+class MainActivity : AppCompatActivity() {
+    var myWallpaperList=arrayOf(R.drawable.download3,R.drawable.download1,R.drawable.download2,R.drawable.download)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        button.setOnClickListener{setWallpaper()}    }
+    private fun setWallpaper(){
+        Toast.makeText(this,"setting wallpaper please wait",Toast.LENGTH_SHORT).show()
+        Handler().postDelayed({
+            for(i in myWallpaperList){
+                var pic:Bitmap=BitmapFactory.decodeResource(resources,i)
+                var wm=WallpaperManager.getInstance(baseContext)
+                wm.setBitmap(pic)
+            }
+        },2000)
+    }
+}
